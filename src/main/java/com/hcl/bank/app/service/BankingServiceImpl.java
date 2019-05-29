@@ -1,8 +1,10 @@
 package com.hcl.bank.app.service;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
@@ -160,4 +162,17 @@ public class BankingServiceImpl implements BankingService {
 		return response;
 	
 	}
+	
+	@Override
+	public List<Long> fetchAllAccountNumbers(Long accountNumber) {
+		List<Long> list=new ArrayList<>();
+		try {
+			logger.debug("BankingServiceImpl -> fetchAllAccountNumbers calling...!");
+			list = accountSummaryRepository.findAllAccountNumbers(accountNumber);
+		} catch (Exception e) {
+			logger.error(this.getClass().getName()+" fetchAllAccountNumbers :"+e.getMessage());
+		}
+		return list;
+	}
+	
 }

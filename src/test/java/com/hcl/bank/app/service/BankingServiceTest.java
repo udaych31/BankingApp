@@ -45,7 +45,7 @@ public class BankingServiceTest {
 		accountSummary.setGender("Male");
 		accountSummary.setMobileNo(1234567890L);
 		accountSummary.setUniqueId("ACVPT4573W");
-		accountSummary.setUserId(12);
+		accountSummary.setUserId(12L);
 
 		when(accountSummaryRepository.save(accountSummary)).thenReturn(accountSummary);
         assertNotEquals(1234L, bankingService.openAccount(accountSummary));
