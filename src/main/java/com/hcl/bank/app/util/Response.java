@@ -8,7 +8,7 @@ public class Response implements Serializable {
 	
 	private Integer statusCode;
 	
-	private String message;
+	private String status;
 	
 	public Response() {
 		super();
@@ -22,24 +22,13 @@ public class Response implements Serializable {
 		this.statusCode = statusCode;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Response [statusCode=");
-		builder.append(statusCode);
-		builder.append(", message=");
-		builder.append(message);
-		builder.append("]");
-		return builder.toString();
-	}
 	
-
 }
