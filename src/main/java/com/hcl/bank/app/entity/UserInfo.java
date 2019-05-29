@@ -30,13 +30,13 @@ public class UserInfo implements Serializable {
 
 	@Column
 	private String role;
-
+	
+	@Column
+	private Long accountNumber;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(columnDefinition = "DATETIME")
 	private Date createDt;
-
-	@Column
-	private Long accountNumber;
 
 	public UserInfo() {
 		super();
@@ -89,5 +89,4 @@ public class UserInfo implements Serializable {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-
 }

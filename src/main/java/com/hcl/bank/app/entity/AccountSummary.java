@@ -50,6 +50,16 @@ public class AccountSummary implements Serializable {
 	@Column(columnDefinition = "DATETIME")
 	private Date createDt;
 	
+	private Integer userId;
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public AccountSummary() {
 		super();
 	}
@@ -61,7 +71,6 @@ public class AccountSummary implements Serializable {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-
 
 	public String getFullName() {
 		return fullName;
