@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.bank.app.dto.TransactionHistoryResponse;
 import com.hcl.bank.app.dto.AccountResponse;
 import com.hcl.bank.app.dto.AccountSummaryRequest;
 import com.hcl.bank.app.dto.FundTransferRequest;
@@ -51,5 +52,16 @@ public class BankingController {
 		logger.info("findAllAccounts calling...!");
 		return bankingService.fetchAllAccountNumbers(accountNumber);
 	}
+	
+	
+	@GetMapping("/transactionHistory")
+	public TransactionHistoryResponse listbreach()
+	{
+		logger.info("inside in controller");
+		logger.debug("inside########");
 
+		TransactionHistoryResponse transactionHistoryResponse=bankingService.TransactionHistory();
+		return transactionHistoryResponse;
+		
+	}
 }

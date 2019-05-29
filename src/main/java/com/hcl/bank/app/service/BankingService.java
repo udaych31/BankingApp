@@ -1,5 +1,6 @@
 package com.hcl.bank.app.service;
 
+import com.hcl.bank.app.dto.TransactionHistoryResponse;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface BankingService {
 	public List<Long> fetchAllAccountNumbers(Long accountNumber);
 	
 	public String openAccount(AccountSummaryRequest accountSummary);
+
+	TransactionHistoryResponse TransactionHistory();
 
 }
