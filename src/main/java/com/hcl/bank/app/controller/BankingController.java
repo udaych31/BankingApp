@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.bank.app.entity.AccountSummary;
 import com.hcl.bank.app.dto.FundTransferRequest;
 import com.hcl.bank.app.dto.FundTransferResponse;
 import com.hcl.bank.app.service.BankingService;
@@ -20,10 +21,15 @@ import com.hcl.bank.app.service.BankingService;
 @RequestMapping("/bank")
 public class BankingController {
 	
-	public static final Logger logger=LogManager.getLogger(BankingController.class);
-	
 	@Autowired
 	private BankingService bankingService;
+	
+	@PostMapping("/openAccount")
+	public String openAccount(@RequestBody AccountSummary accountSummary) {
+		bankingService.openAccount(accountSummary);
+		return "Account opened with Account number "+accountSummary.getAccountNumber();
+		}
+	public static final Logger logger=LogManager.getLogger(BankingController.class);
 	
 	@PostMapping("/transferfund")
 	public FundTransferResponse makeTransaction(@RequestBody FundTransferRequest request) {

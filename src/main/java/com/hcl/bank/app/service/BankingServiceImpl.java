@@ -14,8 +14,10 @@ import com.hcl.bank.app.dto.FundTransferRequest;
 import com.hcl.bank.app.dto.FundTransferResponse;
 import com.hcl.bank.app.entity.AccountSummary;
 import com.hcl.bank.app.entity.TransactionHistory;
+import com.hcl.bank.app.entity.UserInfo;
 import com.hcl.bank.app.repository.AccountSummaryRepository;
 import com.hcl.bank.app.repository.TransactionHistoryRepository;
+import com.hcl.bank.app.repository.UserRepository;
 
 @Service
 public class BankingServiceImpl implements BankingService {
@@ -26,6 +28,23 @@ public class BankingServiceImpl implements BankingService {
 	private AccountSummaryRepository accountSummaryRepository;
 	
 	@Autowired
+	private UserRepository userRepository;
+	
+	public String openAccount(AccountSummary accountSummary) {
+		
+		
+		AccountSummary summary= accountSummaryRepository.save(accountSummary);
+		UserInfo userInfo=new UserInfo();
+		userInfo.setUserId(1111L);
+		userInfo.setUserName("sushil");
+		userInfo.setPassword("sushil");
+		userInfo.setRole("user");
+		userInfo.setCreateDt(new Date());
+		userInfo.setAccountNumber(summary.getAccountNumber());
+		userRepository.save(userInfo);
+		return "Account opened with Account number "+accountSummary.getAccountNumber();
+		}
+	
 	private TransactionHistoryRepository transactionHistoryRepository;
 
 	@Override

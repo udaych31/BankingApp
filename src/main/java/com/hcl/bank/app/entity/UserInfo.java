@@ -31,6 +31,9 @@ public class UserInfo implements Serializable {
 	@Column
 	private String role;
 	
+	@Column
+	private Long accountNumber;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(columnDefinition = "DATETIME")
 	private Date createDt;
@@ -77,6 +80,14 @@ public class UserInfo implements Serializable {
 
 	public void setCreateDt(Date createDt) {
 		this.createDt = createDt;
+	}
+
+	public Long getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(Long accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	
 	
