@@ -17,6 +17,7 @@ import com.hcl.bank.app.dto.AccountResponse;
 import com.hcl.bank.app.dto.AccountSummaryRequest;
 import com.hcl.bank.app.dto.FundTransferRequest;
 import com.hcl.bank.app.dto.FundTransferResponse;
+import com.hcl.bank.app.dto.OpenAccountResponse;
 import com.hcl.bank.app.service.BankingService;
 
 @RestController
@@ -36,7 +37,7 @@ public class BankingController {
 	}
 
 	@PostMapping("/openAccount")
-	public String openAccount(@RequestBody AccountSummaryRequest request) {
+	public OpenAccountResponse openAccount(@RequestBody AccountSummaryRequest request) {
 		return bankingService.openAccount(request);
 		}
 	

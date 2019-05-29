@@ -17,6 +17,7 @@ import com.hcl.bank.app.dto.AccountResponse;
 import com.hcl.bank.app.dto.AccountSummaryRequest;
 import com.hcl.bank.app.dto.FundTransferRequest;
 import com.hcl.bank.app.dto.FundTransferResponse;
+import com.hcl.bank.app.dto.OpenAccountResponse;
 import com.hcl.bank.app.dto.TransactionHistoryDto;
 import com.hcl.bank.app.dto.TransactionHistoryResponse;
 import com.hcl.bank.app.entity.AccountSummary;
@@ -103,7 +104,9 @@ public class BankingServiceImpl implements BankingService {
 		return transactionHistoryResponse;
 	}
 
-	public String openAccount(AccountSummaryRequest request) {
+	public OpenAccountResponse openAccount(AccountSummaryRequest request) {
+		
+		OpenAccountResponse response=new OpenAccountResponse();
 
 		AccountSummary summary = new AccountSummary();
 		summary.setAccountType(request.getAccountType());
@@ -129,7 +132,11 @@ public class BankingServiceImpl implements BankingService {
 			userInfo.setAccountNumber(summary1.getAccountNumber());
 			UserInfo user = userRepository.save(userInfo);
 		}
-		return "Account opened with Account number " + summary1.getAccountNumber();
+		response.setStatusCode(200);
+		response.setStatus("SUCCESS");
+		response.setMessage("Account opened with Account number " + summary1.getAccountNumber());
+		
+		return response;
 	}
 
 	@Override
