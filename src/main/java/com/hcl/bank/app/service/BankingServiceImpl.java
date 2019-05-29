@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hcl.bank.app.dto.AccountResponse;
+import com.hcl.bank.app.dto.AccountSummaryRequest;
 import com.hcl.bank.app.dto.FundTransferRequest;
 import com.hcl.bank.app.dto.FundTransferResponse;
 import com.hcl.bank.app.entity.AccountSummary;
@@ -66,19 +68,35 @@ public class BankingServiceImpl implements BankingService {
 		return response;
 	
 	}
-	public String openAccount(AccountSummary accountSummary) {
+	public String openAccount(AccountSummaryRequest request) {
+		
+		AccountSummary summary=new AccountSummary();
+		summary.setAccountType(request.getAccountType());
+		summary.setAddress(request.getAddress());
+		summary.setBalance(request.getBalance());
+		summary.setCreateDt(new Date());
+		summary.setEmailId(request.getEmailId());
+		summary.setFullName(request.getFullName());
+		summary.setGender(request.getGender());
+		summary.setMobileNo(request.getMobileNo());
+		summary.setUniqueId(request.getUniqueId());
 		
 		
-		AccountSummary summary= accountSummaryRepository.save(accountSummary);
+		
 		UserInfo userInfo=new UserInfo();
-		userInfo.setUserId(1111L);
-		userInfo.setUserName("sushil");
-		userInfo.setPassword("sushil");
+		Random random=new Random();
+		int pwd = random.nextInt(100000);
+		userInfo.setUserName(request.getFullName()+"123");
+		userInfo.setPassword(request.getFullName()+""+pwd);
 		userInfo.setRole("user");
 		userInfo.setCreateDt(new Date());
-		userInfo.setAccountNumber(summary.getAccountNumber());
-		userRepository.save(userInfo);
-		return "Account opened with Account number "+accountSummary.getAccountNumber();
+		AccountSummary summary1= accountSummaryRepository.save(summary);
+		
+		if(summary1!=null) {
+			userInfo.setAccountNumber(summary1.getAccountNumber());
+			UserInfo user = userRepository.save(userInfo);
+		}
+		return "Account opened with Account number "+summary1.getAccountNumber();
 		}
 	
 	
