@@ -17,17 +17,17 @@ import javax.persistence.TemporalType;
 public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
-	
+
 	@Column
 	private String userName;
-	
+
 	@Column
 	private String password;
-	
+
 	@Column
 	private String role;
 	
@@ -37,7 +37,7 @@ public class UserInfo implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(columnDefinition = "DATETIME")
 	private Date createDt;
-	
+
 	public UserInfo() {
 		super();
 	}
@@ -89,7 +89,4 @@ public class UserInfo implements Serializable {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	
-	
-
 }

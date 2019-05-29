@@ -64,7 +64,7 @@ public class AccountSummary implements Serializable {
 	public AccountSummary() {
 		super();
 	}
-
+	
 	public Long getAccountNumber() {
 		return accountNumber;
 	}
@@ -72,6 +72,7 @@ public class AccountSummary implements Serializable {
 	public void setAccountNumber(Long accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+
 	public String getFullName() {
 		return fullName;
 	}
