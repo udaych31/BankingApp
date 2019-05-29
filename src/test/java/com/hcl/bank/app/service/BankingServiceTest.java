@@ -1,9 +1,6 @@
 package com.hcl.bank.app.service;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Date;
@@ -15,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.hcl.bank.app.entity.AccountSummary;
-import com.hcl.bank.app.entity.UserInfo;
 import com.hcl.bank.app.repository.AccountSummaryRepository;
 import com.hcl.bank.app.repository.UserRepository;
 
