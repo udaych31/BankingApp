@@ -3,6 +3,9 @@ package com.hcl.bank.app.service;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -61,6 +64,25 @@ public class BankingServiceImplTest {
 			Assert.assertEquals(200.0, code);
 		}
 		
+		
+		
+	}
+	
+	@Test
+	public void fetchAllAccountNumbersTest() {
+		
+		Long accountNumber=1l;
+		
+		List<Long> list=new ArrayList<Long>();
+		list.add(2l);
+		list.add(3l);
+		
+		when(account.findAllAccountNumbers(accountNumber)).thenReturn(list);
+		List<Long> allAccountNumbers = service.fetchAllAccountNumbers(accountNumber);
+		if(allAccountNumbers!=null && !allAccountNumbers.isEmpty()) {
+			Double size=Double.valueOf(""+allAccountNumbers.size());
+			Assert.assertEquals(2.0,size);
+		}
 		
 		
 	}
