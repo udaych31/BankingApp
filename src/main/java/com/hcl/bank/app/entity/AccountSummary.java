@@ -20,7 +20,7 @@ public class AccountSummary implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long accountSummaryId;
+	private Long accountNumber;
 	
 	@Column
 	private String fullName;
@@ -50,18 +50,27 @@ public class AccountSummary implements Serializable {
 	@Column(columnDefinition = "DATETIME")
 	private Date createDt;
 	
+	private Integer userId;
+	
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
 	public AccountSummary() {
 		super();
 	}
 
-	public Long getAccountSummaryId() {
-		return accountSummaryId;
+	public Long getAccountNumber() {
+		return accountNumber;
 	}
 
-	public void setAccountSummaryId(Long accountSummaryId) {
-		this.accountSummaryId = accountSummaryId;
+	public void setAccountNumber(Long accountNumber) {
+		this.accountNumber = accountNumber;
 	}
-
 	public String getFullName() {
 		return fullName;
 	}
