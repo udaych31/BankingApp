@@ -18,40 +18,63 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class BankGlobalException {
-	
+
 	@ExceptionHandler(BankServiceException.class)
-	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
-	public @ResponseBody ExceptionResponse handleStockServiceException(final BankServiceException exception,final HttpServletRequest request) {
-		ExceptionResponse response=new ExceptionResponse();
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public @ResponseBody ExceptionResponse handleStockServiceException(final BankServiceException exception,
+			final HttpServletRequest request) {
+		ExceptionResponse response = new ExceptionResponse();
 		response.setErrorMsg(exception.getMessage());
 		response.setRequestUri(request.getRequestURI());
 		return response;
 	}
-	
+
 	@ExceptionHandler(Exception.class)
-	@ResponseStatus(value=HttpStatus.INTERNAL_SERVER_ERROR)
-	public @ResponseBody ExceptionResponse handleGlobalException(final Exception exception,final HttpServletRequest request) {
-		ExceptionResponse response=new ExceptionResponse();
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public @ResponseBody ExceptionResponse handleGlobalException(final Exception exception,
+			final HttpServletRequest request) {
+		ExceptionResponse response = new ExceptionResponse();
 		response.setErrorMsg(exception.getMessage());
 		response.setRequestUri(request.getRequestURI());
 		return response;
 	}
-	
-	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
+
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public @ResponseBody Map<String, String> handleValidateException(MethodArgumentNotValidException ex){
-		Map<String,String> map=new HashMap<>();
+	public @ResponseBody Map<String, String> handleValidateException(MethodArgumentNotValidException ex) {
+		Map<String, String> map = new HashMap<>();
 		BindingResult bindingResult = ex.getBindingResult();
 		List<ObjectError> allErrors = bindingResult.getAllErrors();
-		allErrors.forEach(error->{
-			String fieldName=((FieldError)error).getField();
-			String message=((FieldError)error).getDefaultMessage();
+		allErrors.forEach(error -> {
+			String fieldName = ((FieldError) error).getField();
+			String message = ((FieldError) error).getDefaultMessage();
 			map.put(fieldName, message);
-			
+
 		});
 		return map;
-		
+
 	}
-	
+
+	@ExceptionHandler(UserNotFoundException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public @ResponseBody ExceptionResponse handleGlobalException(final UserNotFoundException exception,
+			final HttpServletRequest request) {
+		ExceptionResponse response = new ExceptionResponse();
+		response.setErrorMsg(exception.getMessage());
+		response.setRequestUri(request.getRequestURI());
+		response.setStatusCode(404);
+		return response;
+	}
+
+	@ExceptionHandler(InvalidCredentialsException.class)
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public @ResponseBody ExceptionResponse handleGlobalException(final InvalidCredentialsException exception,
+			final HttpServletRequest request) {
+		ExceptionResponse response = new ExceptionResponse();
+		response.setErrorMsg(exception.getMessage());
+		response.setRequestUri(request.getRequestURI());
+		response.setStatusCode(401);
+		return response;
+	}
 
 }
