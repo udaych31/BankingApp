@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.hcl.bank.app.entity.AccountSummary;
 import com.hcl.bank.app.entity.UserInfo;
 import com.hcl.bank.app.repository.UserRepository;
 
@@ -38,7 +37,7 @@ public class UserLoginTests {
 		optional=Optional.ofNullable(info);
 		
 			
-		Mockito.when(userRepository.findByUserName("suma")).thenReturn(optional);
+		Mockito.when(userRepository.findByUserNameAndRole("suma","user")).thenReturn(optional);
 		Mockito.when(userRepository.findByUserNameAndPassword("suma", "madhurya")).thenReturn(optional);
 		
 		Boolean response = serviceImpl.login("suma", "madhurya");
@@ -48,5 +47,33 @@ public class UserLoginTests {
 		
 		
 	}
+	
+	
+	@Test
+	public void testLoginAdmin() {
+		
+		Optional<UserInfo> optional=Optional.empty();
+		UserInfo info=new UserInfo();
+		info.setAccountNumber(1L);
+		info.setCreateDt(new Date());
+		info.setPassword("suma");
+		info.setRole("user");
+		info.setUserId(1L);
+		info.setUserName("suma");
+		optional=Optional.ofNullable(info);
+		
+			
+		Mockito.when(userRepository.findByUserNameAndRole("suma","admin")).thenReturn(optional);
+		Mockito.when(userRepository.findByUserNameAndPassword("suma", "suma")).thenReturn(optional);
+		
+		Boolean response = serviceImpl.loginAdmin("suma", "suma");
+		
+		Assert.assertEquals(true, response);
+		
+		
+		
+	}
+
+	
 
 }

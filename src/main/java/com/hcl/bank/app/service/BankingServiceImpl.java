@@ -46,7 +46,7 @@ public class BankingServiceImpl implements BankingService {
 		AccountResponse response = null;
 		try {
 			logger.info("Enter into account details");
-			Optional<UserInfo> user = userRepository.findByUserName(userName);
+			Optional<UserInfo> user = userRepository.findByUserNameAndRole(userName, "user");
 			logger.debug("User details " + user.toString());
 			if (user.isPresent()) {
 
@@ -79,7 +79,6 @@ public class BankingServiceImpl implements BankingService {
 					.findAll();
 			List<com.hcl.bank.app.entity.TransactionHistory> transactionHistoryList1 = transactionHistoryRepository
 					.findall(new PageRequest(0, 1));
-			System.out.println(transactionHistoryList1.size());
 			ArrayList<TransactionHistoryDto> transactionHistoryDtoList = new ArrayList<TransactionHistoryDto>();
 			for (com.hcl.bank.app.entity.TransactionHistory transactionHistory : transactionHistoryList) {
 				TransactionHistoryDto transactionHistoryDto = new TransactionHistoryDto();
@@ -105,8 +104,8 @@ public class BankingServiceImpl implements BankingService {
 	}
 
 	public OpenAccountResponse openAccount(AccountSummaryRequest request) {
-		
-		OpenAccountResponse response=new OpenAccountResponse();
+
+		OpenAccountResponse response = new OpenAccountResponse();
 
 		AccountSummary summary = new AccountSummary();
 		summary.setAccountType(request.getAccountType());
@@ -131,11 +130,13 @@ public class BankingServiceImpl implements BankingService {
 		if (summary1 != null) {
 			userInfo.setAccountNumber(summary1.getAccountNumber());
 			UserInfo user = userRepository.save(userInfo);
+			response.setStatusCode(200);
+			response.setStatus("SUCCESS");
+			response.setMessage("Account opened with Account number " + summary1.getAccountNumber());
+			response.setUserName(user.getUserName());
+			response.setPassword(user.getPassword());
 		}
-		response.setStatusCode(200);
-		response.setStatus("SUCCESS");
-		response.setMessage("Account opened with Account number " + summary1.getAccountNumber());
-		
+
 		return response;
 	}
 

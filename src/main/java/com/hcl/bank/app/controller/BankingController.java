@@ -18,6 +18,7 @@ import com.hcl.bank.app.dto.AccountResponse;
 import com.hcl.bank.app.dto.AccountSummaryRequest;
 import com.hcl.bank.app.dto.FundTransferRequest;
 import com.hcl.bank.app.dto.FundTransferResponse;
+import com.hcl.bank.app.dto.LoginRequest;
 import com.hcl.bank.app.dto.OpenAccountResponse;
 import com.hcl.bank.app.service.BankingService;
 
@@ -32,9 +33,9 @@ public class BankingController {
 	BankingService bankingService;
 	
 	@GetMapping("/getAccountDetails")
-	public AccountResponse getAccountDetails(String userName) {
+	public AccountResponse getAccountDetails(@RequestBody LoginRequest request) {
 		
-		return bankingService.getAccountDetails(userName);
+		return bankingService.getAccountDetails(request.getUserName());
 			
 	}
 
@@ -58,7 +59,7 @@ public class BankingController {
 	
 	
 	@GetMapping("/transactionHistory")
-	public TransactionHistoryResponse listbreach()
+	public TransactionHistoryResponse listTransactions()
 	{
 		logger.info("inside in controller");
 		logger.debug("inside########");
