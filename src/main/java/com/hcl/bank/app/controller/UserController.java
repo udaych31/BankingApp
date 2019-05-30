@@ -47,7 +47,7 @@ public class UserController {
 	 
 	  logger.info("enter into login Admin controller ");
 	  UserResponse response=new UserResponse();
-	  Boolean value=  userService.login(request.getUserName(), request.getPassword());
+	  Boolean value=  userService.loginAdmin(request.getUserName(), request.getPassword());
 	  if(value) {
 		  logger.info("login was success");
 		  response.setMessage("Login success full");
