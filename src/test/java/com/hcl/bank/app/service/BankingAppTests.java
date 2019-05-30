@@ -56,7 +56,7 @@ public class BankingAppTests {
 		response.setName("satya");
 
 		Mockito.when(accountRepository.findById(1L)).thenReturn(summary);
-		Mockito.when(userRepository.findByUserName("suma")).thenReturn(user);
+		Mockito.when(userRepository.findByUserNameAndRole("suma","user")).thenReturn(user);
 
 		AccountResponse result = serviceImpl.getAccountDetails("suma");
 

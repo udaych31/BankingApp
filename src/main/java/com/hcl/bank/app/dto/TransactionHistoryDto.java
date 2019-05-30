@@ -2,10 +2,6 @@ package com.hcl.bank.app.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 public class TransactionHistoryDto {
 	private Long transactionId;
 

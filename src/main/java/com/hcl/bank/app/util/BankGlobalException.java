@@ -62,6 +62,7 @@ public class BankGlobalException {
 		ExceptionResponse response = new ExceptionResponse();
 		response.setErrorMsg(exception.getMessage());
 		response.setRequestUri(request.getRequestURI());
+		response.setStatusCode(404);
 		return response;
 	}
 
@@ -72,6 +73,7 @@ public class BankGlobalException {
 		ExceptionResponse response = new ExceptionResponse();
 		response.setErrorMsg(exception.getMessage());
 		response.setRequestUri(request.getRequestURI());
+		response.setStatusCode(401);
 		return response;
 	}
 

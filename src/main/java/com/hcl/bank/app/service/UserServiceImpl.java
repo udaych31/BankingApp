@@ -24,7 +24,9 @@ public class UserServiceImpl implements UserService {
 	public Boolean login(String userName, String password) {
 		logger.info("Enter into login screen");
 		
-		Optional<UserInfo> name = userRepository.findByUserName(userName);
+		String role="user";
+		Optional<UserInfo> name = userRepository.findByUserNameAndRole(userName, role);
+		
 		if (!name.isPresent())
 			throw new UserNotFoundException("UserNotFound Exception");
 
@@ -36,4 +38,25 @@ public class UserServiceImpl implements UserService {
 		return true;
 
 	}
-}
+
+	@Override
+	public Boolean loginAdmin(String userName, String password) {
+       logger.info("Enter into login Admin screen");
+       
+       String role="admin";
+		
+		Optional<UserInfo> name = userRepository.findByUserNameAndRole(userName, role);
+		if (!name.isPresent())
+			throw new UserNotFoundException("UserNotFound Exception");
+
+		Optional<UserInfo> user = userRepository.findByUserNameAndPassword(userName, password);
+
+		if (!user.isPresent())
+			throw new InvalidCredentialsException("InvalidCredentialsException");
+
+		return true;
+
+	}
+
+	}
+

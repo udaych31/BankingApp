@@ -5,6 +5,7 @@ public class ExceptionResponse {
 	private String errorMsg;
 	
 	private String requestUri;
+	private Integer statusCode;
 	
 	public ExceptionResponse() {
 	}
@@ -23,6 +24,14 @@ public class ExceptionResponse {
 
 	public void setRequestUri(String requestUri) {
 		this.requestUri = requestUri;
+	}
+
+	public Integer getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(Integer statusCode) {
+		this.statusCode = statusCode;
 	}
 
 	

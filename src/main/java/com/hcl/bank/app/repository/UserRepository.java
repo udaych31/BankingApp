@@ -11,6 +11,6 @@ import com.hcl.bank.app.entity.UserInfo;
 public interface UserRepository extends JpaRepository<UserInfo, Long> {
 
 	Optional<UserInfo> findByUserNameAndPassword(String name,String password);
-	Optional<UserInfo> findByUserName(String userName);
+	Optional<UserInfo> findByUserNameAndRole(String userName,String role);
 	
 }

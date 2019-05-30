@@ -5,9 +5,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.bank.app.dto.LoginRequest;
 import com.hcl.bank.app.dto.UserResponse;
 import com.hcl.bank.app.service.UserService;
 
@@ -23,11 +25,11 @@ public class UserController {
 
   @PostMapping("/login")
   
-  public UserResponse login(@RequestParam String  userName, @RequestParam  String password ) {
+  public UserResponse login(@RequestBody LoginRequest request ) {
 	 
 	  logger.info("enter into login controller ");
 	  UserResponse response=new UserResponse();
-	  Boolean value=  userService.login(userName, password);
+	  Boolean value=  userService.login(request.getUserName(), request.getPassword());
 	  if(value) {
 		  logger.info("login was success");
 		  response.setMessage("Login success full");
@@ -35,5 +37,26 @@ public class UserController {
 	  }
 	  return response;
   }
+  
+  
+  
+  
+@PostMapping("/loginAdmin")
+  
+  public UserResponse loginAdmin(@RequestBody LoginRequest request ) {
+	 
+	  logger.info("enter into login Admin controller ");
+	  UserResponse response=new UserResponse();
+	  Boolean value=  userService.login(request.getUserName(), request.getPassword());
+	  if(value) {
+		  logger.info("login was success");
+		  response.setMessage("Login success full");
+		  response.setStatusCode(200);
+	  }
+	  return response;
+  }
+  
+  
+  
 
 }
